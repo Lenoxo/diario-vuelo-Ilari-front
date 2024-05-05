@@ -3,6 +3,7 @@ import { baseUrl } from "./baseUrl";
 import { DiaryEntry } from "./types";
 import { useState } from "react";
 import { Diary } from "./components/Diary";
+import { DiaryForm } from "./components/DiaryForm/DiaryForm";
 
 function App() {
   const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
@@ -13,8 +14,9 @@ function App() {
   return (
     <>
       <h1>Diary of Ilari</h1>
+      <DiaryForm />
       <h2>Diary Entries</h2>
-      {diaries.map((diary) => {
+      {diaries.reverse().map((diary) => {
         return <Diary key={diary.id} diaryData={diary} />;
       })}
     </>
