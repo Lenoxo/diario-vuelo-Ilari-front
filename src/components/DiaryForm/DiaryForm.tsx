@@ -1,5 +1,6 @@
 import axios from "axios";
-import { baseUrl } from "../baseUrl";
+import { baseUrl } from "../../baseUrl";
+import "./styles.css";
 
 export function DiaryForm() {
   function handleSubmit(event: React.SyntheticEvent) {
@@ -13,7 +14,7 @@ export function DiaryForm() {
 
     axios
       .post(`${baseUrl}/api/diaries`, { date, visibility, weather, comment })
-      .then(() => console.log("Sent info"));
+      .then(() => alert("Added new entry in the diary"));
   }
 
   return (
