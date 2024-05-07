@@ -1,15 +1,15 @@
 import axios from "axios";
 import { baseUrl } from "./baseUrl";
-import { DiaryEntry } from "./types";
+import { NonSensitiveDiaryEntry } from "./types";
 import { useState } from "react";
 import { Diary } from "./components/Diary";
 import { DiaryForm } from "./components/DiaryForm/DiaryForm";
 
 function App() {
-  const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
+  const [diaries, setDiaries] = useState<NonSensitiveDiaryEntry[]>([]);
 
   axios
-    .get<DiaryEntry[]>(`${baseUrl}/api/diaries`)
+    .get<NonSensitiveDiaryEntry[]>(`${baseUrl}/api/diaries`)
     .then((response) => setDiaries(response.data));
   return (
     <>
