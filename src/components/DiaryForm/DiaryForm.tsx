@@ -1,8 +1,12 @@
 import axios from "axios";
 import { baseUrl } from "../../baseUrl";
 import "./styles.css";
+import { useState } from "react";
+import { PostDiaryError } from "../../types";
 
 export function DiaryForm() {
+  const [error, setError] = useState<PostDiaryError>();
+
   function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -14,11 +18,26 @@ export function DiaryForm() {
 
     axios
       .post(`${baseUrl}/api/diaries`, { date, visibility, weather, comment })
-      .then(() => alert("Added new entry in the diary"));
+      .then(() => {
+        alert("Added new entry in the diary");
+        setError(false);
+      })
+      .catch((error) => {
+        if (axios.isAxiosError(error)) {
+          setError(error);
+        } else {
+          console.log(error);
+        }
+      });
   }
 
   return (
     <form onSubmit={handleSubmit}>
+      {error && (
+        <p className="error-message">
+          Error {error.response?.status}: {error.response?.data as string}
+        </p>
+      )}
       <h2>Add entry</h2>
 
       <label htmlFor="date">Date</label>

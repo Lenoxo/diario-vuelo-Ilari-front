@@ -6,6 +6,10 @@ form {
   font-size: 1rem;
 }
 
+.error-message {
+  color: red;
+}
+
 label {
   margin: 1rem 0 4px 0.5rem;
   font-weight: bold;
