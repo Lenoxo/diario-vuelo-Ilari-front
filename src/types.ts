@@ -1,3 +1,7 @@
+import { AxiosError } from "axios";
+
+export type PostDiaryError = AxiosError | false;
+
 export enum Weather {
   Sunny = "sunny",
   Rainy = "rainy",
