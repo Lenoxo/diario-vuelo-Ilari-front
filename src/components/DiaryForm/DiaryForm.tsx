@@ -2,7 +2,7 @@ import axios from "axios";
 import { baseUrl } from "../../baseUrl";
 import "./styles.css";
 import { useState } from "react";
-import { PostDiaryError } from "../../types";
+import { NewDiaryEntry, PostDiaryError } from "../../types";
 
 export function DiaryForm() {
   const [error, setError] = useState<PostDiaryError>();
@@ -11,13 +11,15 @@ export function DiaryForm() {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
 
-    const date = form.date.value;
-    const visibility = form.visibility.value;
-    const weather = form.weather.value;
-    const comment = form.comment.value;
+    const newDiary: NewDiaryEntry = {
+      date: form.date.value,
+      visibility: form.visibility.value,
+      weather: form.weather.value,
+      comment: form.comment.value,
+    };
 
     axios
-      .post(`${baseUrl}/api/diaries`, { date, visibility, weather, comment })
+      .post(`${baseUrl}/api/diaries`, newDiary)
       .then(() => {
         alert("Added new entry in the diary");
         setError(false);
